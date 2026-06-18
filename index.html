@@ -11,7 +11,7 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
@@ -67,50 +67,62 @@
         </div>
 
         <!-- Grid Ringkasan Finansial -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 mb-5 md:mb-6">
-            <!-- Saldo Utama -->
-            <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-5 md:mb-6">
+            <!-- Total Harta -->
+            <div class="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p class="text-slate-400 text-[10px] md:text-xs font-semibold uppercase tracking-wider">Total Sisa Saldo (Gabungan)</p>
-                    <p id="total-saldo" class="text-xl md:text-2xl font-black text-slate-800 mt-0.5">Rp 0</p>
+                    <p class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Total Harta (Akun)</p>
+                    <p id="total-saldo" class="text-lg md:text-xl font-black text-slate-800 mt-0.5">Rp 0</p>
                 </div>
-                <div class="bg-indigo-50 p-3 md:p-4 rounded-xl md:rounded-2xl text-indigo-600">
-                    <i class="fa-solid fa-scale-balanced text-xl md:text-2xl"></i>
+                <div class="bg-indigo-50 p-3 rounded-xl text-indigo-600">
+                    <i class="fa-solid fa-vault text-lg md:text-xl"></i>
+                </div>
+            </div>
+            <!-- Total Limit Budget -->
+            <div class="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Rencana Limit Budget</p>
+                    <p id="total-budget-limit" class="text-lg md:text-xl font-black text-slate-800 mt-0.5">Rp 0</p>
+                </div>
+                <div class="bg-violet-50 p-3 rounded-xl text-violet-600">
+                    <i class="fa-solid fa-bullseye text-lg md:text-xl"></i>
                 </div>
             </div>
             <!-- Pemasukan -->
-            <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+            <div class="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p id="pemasukan-label" class="text-slate-400 text-[10px] md:text-xs font-semibold uppercase tracking-wider">Pemasukan Bulan Ini</p>
-                    <p id="total-pemasukan" class="text-xl md:text-2xl font-black text-emerald-600 mt-0.5">Rp 0</p>
+                    <p id="pemasukan-label" class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Pemasukan Bulan Ini</p>
+                    <p id="total-pemasukan" class="text-lg md:text-xl font-black text-emerald-600 mt-0.5">Rp 0</p>
                 </div>
-                <div class="bg-emerald-50 p-3 md:p-4 rounded-xl md:rounded-2xl text-emerald-600">
-                    <i class="fa-solid fa-circle-arrow-down text-xl md:text-2xl"></i>
+                <div class="bg-emerald-50 p-3 rounded-xl text-emerald-600">
+                    <i class="fa-solid fa-circle-arrow-down text-lg md:text-xl"></i>
                 </div>
             </div>
             <!-- Pengeluaran -->
-            <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+            <div class="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p id="pengeluaran-label" class="text-slate-400 text-[10px] md:text-xs font-semibold uppercase tracking-wider">Pengeluaran Bulan Ini</p>
-                    <p id="total-pengeluaran" class="text-xl md:text-2xl font-black text-rose-600 mt-0.5">Rp 0</p>
+                    <p id="pengeluaran-label" class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Pengeluaran Bulan Ini</p>
+                    <p id="total-pengeluaran" class="text-lg md:text-xl font-black text-rose-600 mt-0.5">Rp 0</p>
                 </div>
-                <div class="bg-rose-50 p-3 md:p-4 rounded-xl md:rounded-2xl text-rose-600">
-                    <i class="fa-solid fa-circle-arrow-up text-xl md:text-2xl"></i>
+                <div class="bg-rose-50 p-3 rounded-xl text-rose-600">
+                    <i class="fa-solid fa-circle-arrow-up text-lg md:text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <!-- Panel Monitoring 8 Akun (Sumber Dana) -->
+        <!-- Panel Monitoring Akun (Sumber Dana) -->
         <div class="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-100 mb-5 md:mb-6">
             <div class="flex justify-between items-center mb-3">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-building-columns text-indigo-600 text-md md:text-lg"></i>
-                    <h2 class="text-sm md:text-lg font-extrabold text-slate-800">Monitor Sumber Dana (Akun)</h2>
+                    <h2 class="text-sm md:text-base font-extrabold text-slate-800">Monitor Sumber Dana (Akun)</h2>
                 </div>
-                <span class="text-[10px] text-slate-400 hidden sm:inline">Sentuh ikon pensil untuk mengedit nama / saldo awal akun</span>
-                <span class="text-[10px] text-indigo-500 font-bold sm:hidden flex items-center gap-1">
-                    Geser <i class="fa-solid fa-arrow-right animate-pulse"></i>
-                </span>
+                <div class="flex items-center space-x-3">
+                    <button onclick="openAddAccountModal()" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1.5 rounded-xl transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> Akun Baru
+                    </button>
+                    <span class="text-[10px] text-slate-400 hidden sm:inline">Sentuh ikon pensil untuk edit</span>
+                </div>
             </div>
             
             <!-- Carousel horizontal di Mobile, Grid di Desktop -->
@@ -208,8 +220,11 @@
                             <i class="fa-solid fa-sliders text-indigo-600 text-md md:text-lg"></i>
                             <h2 class="text-base md:text-lg font-extrabold text-slate-800">Limit & Sisa Budget</h2>
                         </div>
+                        <button onclick="openAddCategoryModal()" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1.5 rounded-xl transition flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Kategori Baru
+                        </button>
                     </div>
-                    <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">Pantau sisa anggaran berdasarkan bulan aktif yang sedang dipilih. Limit di bulan baru otomatis disalin dari bulan sebelumnya!</p>
+                    <p class="text-[11px] text-slate-400 mb-4 leading-relaxed font-medium">Pantau anggaran per kategori di bulan aktif. Klik tombol plus di atas untuk membuat kategori pengeluaran/pemasukan baru!</p>
 
                     <!-- List Progress Bar Kategori -->
                     <div id="budget-progress-list" class="space-y-3.5">
@@ -231,10 +246,10 @@
                         </button>
                     </div>
 
-                    <!-- List Transaksi Responsif & Bebas Overflow Horizontal -->
+                    <!-- List Transaksi Responsif -->
                     <div class="w-full">
                         <div id="transaction-list-container" class="space-y-3">
-                            <!-- Diperbarui untuk layout list modern di mobile agar tidak terpotong -->
+                            <!-- Diperbarui untuk layout list modern di mobile -->
                         </div>
                         
                         <!-- State Kosong -->
@@ -292,6 +307,37 @@
         </div>
     </div>
 
+    <!-- MODAL TAMBAH KATEGORI BARU -->
+    <div id="add-category-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center hidden z-50 p-0 sm:p-4">
+        <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl shadow-xl overflow-hidden pb-8 sm:pb-0">
+            <div class="bg-gradient-to-r from-indigo-700 to-violet-600 p-4 md:p-5 text-white flex justify-between items-center">
+                <h3 class="font-extrabold text-md md:text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle"></i> Tambah Kategori Baru
+                </h3>
+                <button onclick="closeAddCategoryModal()" class="text-white/80 hover:text-white text-lg focus:outline-none p-1.5">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-5 md:p-6 space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Tipe Kategori</label>
+                    <select id="new-cat-type" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none font-semibold text-sm">
+                        <option value="pengeluaran">Pengeluaran (Membatasi Budget)</option>
+                        <option value="pemasukan">Pemasukan (Sumber Income)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Nama Kategori Baru</label>
+                    <input type="text" id="new-cat-name" placeholder="Misal: Hobi Kucing, Cicilan, dll" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none font-semibold text-sm">
+                </div>
+                <div class="flex space-x-3 pt-2">
+                    <button onclick="closeAddCategoryModal()" class="w-1/2 py-3 text-xs font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 rounded-xl transition">Batal</button>
+                    <button onclick="saveNewCategory()" class="w-1/2 py-3 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition shadow-md shadow-indigo-100">Simpan Kategori</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL EDIT AKUN / SUMBER DANA -->
     <div id="account-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center hidden z-50 p-0 sm:p-4 transition-all duration-300">
         <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl shadow-xl overflow-hidden transform transition-all pb-8 sm:pb-0">
@@ -328,6 +374,37 @@
         </div>
     </div>
 
+    <!-- MODAL TAMBAH AKUN BARU -->
+    <div id="add-account-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center hidden z-50 p-0 sm:p-4">
+        <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl shadow-xl overflow-hidden pb-8 sm:pb-0">
+            <div class="bg-gradient-to-r from-indigo-700 to-violet-600 p-4 md:p-5 text-white flex justify-between items-center">
+                <h3 class="font-extrabold text-md md:text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle"></i> Tambah Akun Baru
+                </h3>
+                <button onclick="closeAddAccountModal()" class="text-white/80 hover:text-white text-lg focus:outline-none p-1.5">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-5 md:p-6 space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Nama Akun Baru</label>
+                    <input type="text" id="new-acc-name" placeholder="Misal: Bank Jago Main, Crypto, Saku Fisik" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Saldo Awal (Rp)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 font-semibold text-sm">Rp</span>
+                        <input type="number" id="new-acc-balance" placeholder="0" class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none font-semibold text-sm">
+                    </div>
+                </div>
+                <div class="flex space-x-3 pt-2">
+                    <button onclick="closeAddAccountModal()" class="w-1/2 py-3 text-xs font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 rounded-xl transition">Batal</button>
+                    <button onclick="saveNewAccount()" class="w-1/2 py-3 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition shadow-md shadow-indigo-100">Simpan Akun</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL CUSTOM CONFIRMATION -->
     <div id="confirm-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center hidden z-50 p-0 sm:p-4">
         <div class="bg-white w-full sm:max-w-sm rounded-t-3xl sm:rounded-2xl shadow-xl overflow-hidden p-6 text-center space-y-4 pb-8 sm:pb-6">
@@ -345,7 +422,7 @@
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION BANNER (Untuk Notifikasi Auto-Delete Tahun Baru) -->
+    <!-- TOAST NOTIFICATION BANNER -->
     <div id="toast-notification" class="fixed bottom-4 right-4 max-w-sm bg-indigo-900 text-white rounded-2xl shadow-2xl p-4 border border-indigo-500/30 flex gap-3 items-start hidden transform translate-y-10 opacity-0 transition-all duration-500 z-50">
         <div class="bg-indigo-500/20 p-2 rounded-xl text-indigo-300">
             <i class="fa-solid fa-gift text-lg"></i>
@@ -361,8 +438,8 @@
 
     <!-- Logika Koding JavaScript -->
     <script>
-        // Kategori Pengeluaran
-        const expenseCategories = [
+        // Kategori Pengeluaran Dinamis dari LocalStorage atau Bawaan
+        let expenseCategories = JSON.parse(localStorage.getItem('expenseCategories')) || [
             'Uang Makan', 
             'Transportasi', 
             'Gym', 
@@ -372,6 +449,14 @@
             'Expenses', 
             'Internet', 
             'Langganan Digital'
+        ];
+
+        // Kategori Pemasukan Dinamis dari LocalStorage atau Bawaan
+        let incomeCategories = JSON.parse(localStorage.getItem('incomeCategories')) || [
+            'Gaji/Bonus', 
+            'Investasi', 
+            'Penjualan', 
+            'Lain-lain'
         ];
 
         // Ikon & Warna Kategori Pengeluaran
@@ -401,10 +486,25 @@
             'Lain-lain': '#64748b'
         };
 
-        // Kategori Pemasukan
-        const incomeCategories = ['Gaji/Bonus', 'Investasi', 'Penjualan', 'Lain-lain'];
+        // Mengembalikan ikon dan warna kategori dinamis (untuk mengakomodasi kategori kustom)
+        function getCategoryMeta(cat) {
+            if (categoryMeta[cat]) {
+                return categoryMeta[cat];
+            }
+            // Template fallback untuk kategori baru yang dibuat pengguna
+            return {
+                icon: 'fa-tag',
+                color: 'text-violet-500',
+                bg: 'bg-violet-50',
+                barColor: 'bg-violet-500'
+            };
+        }
 
-        // 8 Akun Default
+        function getCategoryColor(cat) {
+            return defaultCategoryColors[cat] || '#8b5cf6'; // Violet default
+        }
+
+        // 8 Akun Default + Dukungan Tambah Akun
         const defaultAccounts = [
             { id: 'acc1', name: 'Dompet Tunai', initialBalance: 500000, icon: 'fa-money-bill-wave', color: 'text-emerald-600', bg: 'bg-emerald-50' },
             { id: 'acc2', name: 'Bank BCA', initialBalance: 2500000, icon: 'fa-credit-card', color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -420,7 +520,7 @@
         let currentType = 'pengeluaran'; 
         let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
         
-        // Peta Anggaran Bulanan (Disimpan di localStorage dengan format: { "YYYY-MM": { "Kategori": Nominal, ... } })
+        // Peta Anggaran Bulanan
         let monthlyCategoryBudgets = JSON.parse(localStorage.getItem('monthlyCategoryBudgets')) || {};
 
         let expenseChartInstance = null;
@@ -467,14 +567,10 @@
             const storedYear = localStorage.getItem('last_active_year');
             
             if (storedYear && Number(storedYear) < currentYear) {
-                // Terjadi transisi tahun baru!
                 transactions = [];
                 localStorage.removeItem('transactions');
-                
-                // Set tahun aktif yang baru
                 localStorage.setItem('last_active_year', currentYear);
                 
-                // Tampilkan banner notifikasi yang ramah
                 showToast(
                     'Tahun Baru Terdeteksi!', 
                     `Selamat Tahun Baru ${currentYear}! Database transaksi tahun ${storedYear} telah dibersihkan otomatis demi performa optimal.`
@@ -494,7 +590,6 @@
                 toast.classList.remove('translate-y-10', 'opacity-0');
             }, 50);
 
-            // Sembunyikan otomatis setelah 7 detik
             setTimeout(() => {
                 closeToast();
             }, 7000);
@@ -510,14 +605,12 @@
 
         /**
          * Mengambil anggaran untuk bulan tertentu.
-         * Jika belum terdefinisi, cari bulan sebelumnya yang memiliki anggaran untuk disalin.
          */
         function getBudgetsForMonth(monthStr) {
             if (monthlyCategoryBudgets[monthStr]) {
                 return monthlyCategoryBudgets[monthStr];
             }
 
-            // Cari bulan terdekat sebelumnya yang punya data anggaran
             const keys = Object.keys(monthlyCategoryBudgets).sort();
             let fallbackBudget = null;
 
@@ -528,22 +621,25 @@
                 }
             }
 
-            // Jika tidak ada data anggaran bulan sebelumnya sama sekali, pakai default
             if (!fallbackBudget) {
-                fallbackBudget = {
-                    'Uang Makan': 1500000,
-                    'Transportasi': 500000,
-                    'Gym': 300000,
-                    'Skincare': 400000,
-                    'Utilitas': 600000,
-                    'Tabungan': 1000000,
-                    'Expenses': 500000,
-                    'Internet': 250000,
-                    'Langganan Digital': 150000
-                };
+                // Konfigurasi bawaan dinamis berdasarkan kategori pengeluaran terdaftar
+                fallbackBudget = {};
+                expenseCategories.forEach(cat => {
+                    fallbackBudget[cat] = 0; // Mulai dari 0 untuk semua kategori baru/default jika tidak ada carry-over
+                });
+                // Beberapa default spesifik
+                if (fallbackBudget['Uang Makan'] !== undefined) fallbackBudget['Uang Makan'] = 1500000;
+                if (fallbackBudget['Transportasi'] !== undefined) fallbackBudget['Transportasi'] = 500000;
+                if (fallbackBudget['Internet'] !== undefined) fallbackBudget['Internet'] = 250000;
+            } else {
+                // Pastikan jika ada kategori kustom baru yang baru saja ditambahkan, ia terdaftar juga di carryover
+                expenseCategories.forEach(cat => {
+                    if (fallbackBudget[cat] === undefined) {
+                        fallbackBudget[cat] = 0;
+                    }
+                });
             }
 
-            // Simpan anggaran hasil carry-over/default ini ke bulan yang baru agar tersimpan resmi
             monthlyCategoryBudgets[monthStr] = fallbackBudget;
             localStorage.setItem('monthlyCategoryBudgets', JSON.stringify(monthlyCategoryBudgets));
 
@@ -559,7 +655,6 @@
             const baseDate = new Date();
             monthSelector.innerHTML = '';
 
-            // Buat menu dropdown berisi 12 bulan terakhir
             for (let i = 0; i < 12; i++) {
                 const targetDate = new Date(baseDate.getFullYear(), baseDate.getMonth() - i, 1);
                 const year = targetDate.getFullYear();
@@ -574,7 +669,6 @@
                 monthSelector.appendChild(option);
             }
 
-            // Set default ke bulan aktif saat ini
             const currentMonthValue = String(baseDate.getMonth() + 1).padStart(2, '0');
             selectedMonthYear = `${baseDate.getFullYear()}-${currentMonthValue}`;
             monthSelector.value = selectedMonthYear;
@@ -656,10 +750,9 @@
         window.openBudgetModal = function(category) {
             selectedCategoryToEdit = category;
             
-            // Ambil data anggaran aktif di bulan terpilih saat ini
             const budgets = getBudgetsForMonth(selectedMonthYear);
             const currentBudget = budgets[category] || 0;
-            const meta = categoryMeta[category] || { icon: 'fa-tag' };
+            const meta = getCategoryMeta(category);
             
             modalCategoryName.textContent = category;
             modalCategoryIcon.innerHTML = `<i class="fa-solid ${meta.icon} ${meta.color}"></i>`;
@@ -672,11 +765,10 @@
             budgetModal.classList.add('hidden');
         };
 
-        // Simpan Limit Budget Kategori Baru (Hanya berefek di bulan terpilih)
+        // Simpan Limit Budget Kategori Baru
         window.saveCategoryBudget = function() {
             const newValue = Math.abs(Number(modalBudgetInput.value));
             
-            // Ambil, ubah, dan simpan kembali khusus untuk bulan aktif
             const budgets = getBudgetsForMonth(selectedMonthYear);
             budgets[selectedCategoryToEdit] = newValue;
             
@@ -694,7 +786,7 @@
             if (!currentAcc) return;
 
             modalAccountSysName.textContent = `AKUN SEBELUMNYA: ${currentAcc.name}`;
-            modalAccountIcon.innerHTML = `<i class="fa-solid ${currentAcc.icon} ${currentAcc.color}"></i>`;
+            modalAccountIcon.innerHTML = `<i class="fa-solid ${currentAcc.icon || 'fa-wallet'} ${currentAcc.color || 'text-indigo-600'}"></i>`;
             modalAccountNameInput.value = currentAcc.name;
             modalAccountBalanceInput.value = currentAcc.initialBalance;
 
@@ -718,6 +810,92 @@
                 updateAccountOptions();
                 updateUI();
             }
+        };
+
+        // Modal Tambah Kategori Baru
+        window.openAddCategoryModal = function() {
+            document.getElementById('new-cat-name').value = '';
+            document.getElementById('add-category-modal').classList.remove('hidden');
+        };
+
+        window.closeAddCategoryModal = function() {
+            document.getElementById('add-category-modal').classList.add('hidden');
+        };
+
+        window.saveNewCategory = function() {
+            const catName = document.getElementById('new-cat-name').value.trim();
+            const catType = document.getElementById('new-cat-type').value;
+
+            if (!catName) {
+                showToast('Gagal', 'Nama kategori tidak boleh kosong!');
+                return;
+            }
+
+            if (catType === 'pengeluaran') {
+                if (expenseCategories.includes(catName)) {
+                    showToast('Gagal', 'Kategori pengeluaran tersebut sudah ada!');
+                    return;
+                }
+                expenseCategories.push(catName);
+                localStorage.setItem('expenseCategories', JSON.stringify(expenseCategories));
+                
+                // Daftarkan limit default 0 ke bulan aktif
+                const budgets = getBudgetsForMonth(selectedMonthYear);
+                budgets[catName] = 0;
+                monthlyCategoryBudgets[selectedMonthYear] = budgets;
+                localStorage.setItem('monthlyCategoryBudgets', JSON.stringify(monthlyCategoryBudgets));
+            } else {
+                if (incomeCategories.includes(catName)) {
+                    showToast('Gagal', 'Kategori pemasukan tersebut sudah ada!');
+                    return;
+                }
+                incomeCategories.push(catName);
+                localStorage.setItem('incomeCategories', JSON.stringify(incomeCategories));
+            }
+
+            closeAddCategoryModal();
+            updateCategoryOptions();
+            updateUI();
+            showToast('Berhasil', `Kategori "${catName}" berhasil ditambahkan!`);
+        };
+
+        // Modal Tambah Akun Baru
+        window.openAddAccountModal = function() {
+            document.getElementById('new-acc-name').value = '';
+            document.getElementById('new-acc-balance').value = '';
+            document.getElementById('add-account-modal').classList.remove('hidden');
+        };
+
+        window.closeAddAccountModal = function() {
+            document.getElementById('add-account-modal').classList.add('hidden');
+        };
+
+        window.saveNewAccount = function() {
+            const accName = document.getElementById('new-acc-name').value.trim();
+            const accBalance = Math.abs(Number(document.getElementById('new-acc-balance').value)) || 0;
+
+            if (!accName) {
+                showToast('Gagal', 'Nama akun tidak boleh kosong!');
+                return;
+            }
+
+            const newId = 'acc_' + Date.now();
+            const newAccount = {
+                id: newId,
+                name: accName,
+                initialBalance: accBalance,
+                icon: 'fa-wallet',
+                color: 'text-indigo-600',
+                bg: 'bg-indigo-50'
+            };
+
+            accounts.push(newAccount);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            closeAddAccountModal();
+            updateAccountOptions();
+            updateUI();
+            showToast('Berhasil', `Akun "${accName}" berhasil ditambahkan!`);
         };
 
         // Custom Confirmation Modal Controller
@@ -745,11 +923,12 @@
             let totalSaldoGabungan = 0;
             let totalPemasukan = 0;
             let totalPengeluaran = 0;
+            let totalBudgetLimit = 0;
 
             // Ambil anggaran terdaftar untuk bulan aktif saat ini
             const activeBudgets = getBudgetsForMonth(selectedMonthYear);
 
-            // Inisialisasi pelacakan saldo akun secara dinamis berdasarkan seluruh transaksi kumulatif
+            // Inisialisasi pelacakan saldo akun secara dinamis
             const accountBalances = {};
             accounts.forEach(acc => {
                 accountBalances[acc.id] = acc.initialBalance;
@@ -761,18 +940,16 @@
 
             listContainer.innerHTML = '';
             
-            // Urutkan transaksi berdasarkan tanggal terbaru
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             let countTransactionsInMonth = 0;
 
-            // Loop Transaksi & Perhitungan Berjalan
             transactions.forEach((tx) => {
                 const amount = Number(tx.amount);
                 const isExpense = tx.type === 'pengeluaran';
                 const currentAccountId = tx.accountId || 'acc1'; 
 
-                // Perbarui Saldo Akun Kumulatif (Selalu terpengaruh untuk melacak saldo nyata)
+                // Perbarui Saldo Akun Kumulatif (global)
                 if (isExpense) {
                     if (accountBalances[currentAccountId] !== undefined) {
                         accountBalances[currentAccountId] -= amount;
@@ -783,7 +960,6 @@
                     }
                 }
 
-                // Saring transaksi berdasarkan Tahun-Bulan terpilih ("YYYY-MM")
                 const txMonthYear = tx.date ? tx.date.substring(0, 7) : '';
                 
                 if (txMonthYear === selectedMonthYear) {
@@ -798,14 +974,14 @@
                         totalPemasukan += amount;
                     }
 
-                    // Render Baris Riwayat Transaksi - Dioptimalkan sebagai Card list yang responsif
+                    // Render Baris Riwayat Transaksi
                     const badgeColor = isExpense 
                         ? 'bg-rose-50 text-rose-700 border-rose-100' 
                         : 'bg-emerald-50 text-emerald-700 border-emerald-100';
 
                     const amountClass = isExpense ? 'text-rose-600' : 'text-emerald-600';
                     const prefix = isExpense ? '-' : '+';
-                    const meta = isExpense ? (categoryMeta[tx.category] || { icon: 'fa-tag' }) : { icon: 'fa-circle-arrow-down' };
+                    const meta = isExpense ? getCategoryMeta(tx.category) : { icon: 'fa-circle-arrow-down' };
                     
                     const linkedAccount = accounts.find(a => a.id === currentAccountId) || { name: 'Tunai' };
 
@@ -848,33 +1024,38 @@
                 emptyState.classList.add('hidden');
             }
 
-            // Hitung akumulasi Total Saldo Gabungan secara real-time dari sisa saldo berjalan tiap Akun
+            // Hitung akumulasi Total Saldo/Harta Gabungan
             Object.values(accountBalances).forEach(bal => {
                 totalSaldoGabungan += bal;
             });
 
+            // Hitung total budget keseluruhan bulan aktif
+            expenseCategories.forEach(cat => {
+                totalBudgetLimit += (activeBudgets[cat] || 0);
+            });
+
             // Update Panel Finansial Atas
             document.getElementById('total-saldo').textContent = formatRupiah(totalSaldoGabungan);
+            document.getElementById('total-budget-limit').textContent = formatRupiah(totalBudgetLimit);
             document.getElementById('total-pemasukan').textContent = '+ ' + formatRupiah(totalPemasukan);
             document.getElementById('total-pengeluaran').textContent = '- ' + formatRupiah(totalPengeluaran);
 
             if (totalSaldoGabungan < 0) {
-                document.getElementById('total-saldo').className = "text-xl md:text-2xl font-black text-rose-600 mt-0.5";
+                document.getElementById('total-saldo').className = "text-base md:text-lg font-black text-rose-600 mt-0.5";
             } else {
-                document.getElementById('total-saldo').className = "text-xl md:text-2xl font-black text-indigo-700 mt-0.5";
+                document.getElementById('total-saldo').className = "text-base md:text-lg font-black text-slate-800 mt-0.5";
             }
 
             // Render Panel Monitoring Akun (8 Sumber Dana)
             renderAccountsGrid(accountBalances);
 
-            // Render Progress Limit Budget Kategori (menggunakan anggaran bulan aktif)
+            // Render Progress Limit Budget Kategori
             renderBudgetProgress(spentByCategory, activeBudgets);
 
             // Perbarui Diagram Chart.js
             updateChartData(spentByCategory);
         }
 
-        // Render 8 Kartu Akun Sumber Dana secara dinamis dengan Scroll Snap Mobile & Grid Desktop
         function renderAccountsGrid(accountBalances) {
             accountsGrid.innerHTML = '';
             accounts.forEach(acc => {
@@ -885,8 +1066,8 @@
                 
                 card.innerHTML = `
                     <div class="flex justify-between items-start mb-2">
-                        <span class="${acc.bg} p-1.5 rounded-lg text-xs flex items-center justify-center">
-                            <i class="fa-solid ${acc.icon} ${acc.color}"></i>
+                        <span class="${acc.bg || 'bg-indigo-50'} p-1.5 rounded-lg text-xs flex items-center justify-center">
+                            <i class="fa-solid ${acc.icon || 'fa-wallet'} ${acc.color || 'text-indigo-600'}"></i>
                         </span>
                         <button onclick="openAccountModal('${acc.id}')" class="text-slate-300 hover:text-indigo-600 opacity-100 md:opacity-0 group-hover:opacity-100 transition p-1" title="Edit Info Akun">
                             <i class="fa-solid fa-pencil text-[9px]"></i>
@@ -903,7 +1084,6 @@
             });
         }
 
-        // Render List Progress Bar Budget Pengeluaran
         function renderBudgetProgress(spentByCategory, activeBudgets) {
             budgetProgressList.innerHTML = '';
             
@@ -911,7 +1091,7 @@
                 const limit = activeBudgets[category] || 0;
                 const spent = spentByCategory[category] || 0;
                 const remaining = limit - spent;
-                const meta = categoryMeta[category];
+                const meta = getCategoryMeta(category);
                 
                 let percent = 0;
                 if (limit > 0) {
@@ -1012,7 +1192,7 @@
                 if (value > 0) {
                     labels.push(cat);
                     dataValues.push(value);
-                    bgColors.push(defaultCategoryColors[cat] || '#64748b');
+                    bgColors.push(getCategoryColor(cat));
                 }
             });
 
@@ -1043,7 +1223,7 @@
             const descInput = document.getElementById('description');
             const dateInput = document.getElementById('transaction-date');
 
-            const transactionDate = dateInput.value; // Format: "YYYY-MM-DD"
+            const transactionDate = dateInput.value; 
             const txMonthYear = transactionDate.substring(0, 7);
 
             const newTransaction = {
@@ -1062,12 +1242,9 @@
             amountInput.value = '';
             descInput.value = '';
             
-            // Set tanggal kembali ke hari ini
             const today = new Date();
             dateInput.value = today.toISOString().substring(0, 10);
 
-            // Jika transaksi yang baru diinput berada di bulan yang berbeda dari selektor bulan berjalan,
-            // pindahkan selektor ke bulan transaksi tersebut agar langsung terlihat.
             if (txMonthYear !== selectedMonthYear) {
                 const options = Array.from(monthSelector.options);
                 const hasOption = options.some(opt => opt.value === txMonthYear);
@@ -1104,10 +1281,19 @@
                     transactions = [];
                     accounts = defaultAccounts;
                     monthlyCategoryBudgets = {};
+                    expenseCategories = [
+                        'Uang Makan', 'Transportasi', 'Gym', 'Skincare', 'Utilitas', 'Tabungan', 'Expenses', 'Internet', 'Langganan Digital'
+                    ];
+                    incomeCategories = [
+                        'Gaji/Bonus', 'Investasi', 'Penjualan', 'Lain-lain'
+                    ];
                     localStorage.removeItem('transactions');
                     localStorage.removeItem('accounts');
                     localStorage.removeItem('monthlyCategoryBudgets');
+                    localStorage.removeItem('expenseCategories');
+                    localStorage.removeItem('incomeCategories');
                     updateAccountOptions();
+                    updateCategoryOptions();
                     updateUI();
                 }
             );
@@ -1115,15 +1301,12 @@
 
         // Jalankan Aplikasi setelah Window termuat
         window.onload = function() {
-            // Jalankan pemeriksaan tahun baru untuk pembersihan otomatis
             checkNewYearAutoWipe();
-
             initMonthSelector();
             initChart();
             updateCategoryOptions();
             updateAccountOptions();
             
-            // Isi tanggal transaksi default dengan hari ini (18 Juni 2026)
             const today = new Date();
             document.getElementById('transaction-date').value = today.toISOString().substring(0, 10);
             
