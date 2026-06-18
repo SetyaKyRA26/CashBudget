@@ -109,7 +109,7 @@
                 </div>
                 <span class="text-[10px] text-slate-400 hidden sm:inline">Sentuh ikon pensil untuk mengedit nama / saldo awal akun</span>
                 <span class="text-[10px] text-indigo-500 font-bold sm:hidden flex items-center gap-1">
-                    Swipe <i class="fa-solid fa-arrow-right animate-pulse"></i>
+                    Geser <i class="fa-solid fa-arrow-right animate-pulse"></i>
                 </span>
             </div>
             
@@ -209,7 +209,7 @@
                             <h2 class="text-base md:text-lg font-extrabold text-slate-800">Limit & Sisa Budget</h2>
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">Pantau sisa anggaran berdasarkan bulan aktif yang sedang dipilih. Sentuh tombol pensil untuk mengubah limit bulanan.</p>
+                    <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">Pantau sisa anggaran berdasarkan bulan aktif yang sedang dipilih. Limit di bulan baru otomatis disalin dari bulan sebelumnya!</p>
 
                     <!-- List Progress Bar Kategori -->
                     <div id="budget-progress-list" class="space-y-3.5">
@@ -420,17 +420,8 @@
         let currentType = 'pengeluaran'; 
         let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
         
-        let categoryBudgets = JSON.parse(localStorage.getItem('categoryBudgets')) || {
-            'Uang Makan': 1500000,
-            'Transportasi': 500000,
-            'Gym': 300000,
-            'Skincare': 400000,
-            'Utilitas': 600000,
-            'Tabungan': 1000000,
-            'Expenses': 500000,
-            'Internet': 250000,
-            'Langganan Digital': 150000
-        };
+        // Peta Anggaran Bulanan (Disimpan di localStorage dengan format: { "YYYY-MM": { "Kategori": Nominal, ... } })
+        let monthlyCategoryBudgets = JSON.parse(localStorage.getItem('monthlyCategoryBudgets')) || {};
 
         let expenseChartInstance = null;
         let selectedCategoryToEdit = '';
@@ -517,16 +508,58 @@
             }, 500);
         };
 
+        /**
+         * Mengambil anggaran untuk bulan tertentu.
+         * Jika belum terdefinisi, cari bulan sebelumnya yang memiliki anggaran untuk disalin.
+         */
+        function getBudgetsForMonth(monthStr) {
+            if (monthlyCategoryBudgets[monthStr]) {
+                return monthlyCategoryBudgets[monthStr];
+            }
+
+            // Cari bulan terdekat sebelumnya yang punya data anggaran
+            const keys = Object.keys(monthlyCategoryBudgets).sort();
+            let fallbackBudget = null;
+
+            for (let i = keys.length - 1; i >= 0; i--) {
+                if (keys[i] < monthStr) {
+                    fallbackBudget = { ...monthlyCategoryBudgets[keys[i]] };
+                    break;
+                }
+            }
+
+            // Jika tidak ada data anggaran bulan sebelumnya sama sekali, pakai default
+            if (!fallbackBudget) {
+                fallbackBudget = {
+                    'Uang Makan': 1500000,
+                    'Transportasi': 500000,
+                    'Gym': 300000,
+                    'Skincare': 400000,
+                    'Utilitas': 600000,
+                    'Tabungan': 1000000,
+                    'Expenses': 500000,
+                    'Internet': 250000,
+                    'Langganan Digital': 150000
+                };
+            }
+
+            // Simpan anggaran hasil carry-over/default ini ke bulan yang baru agar tersimpan resmi
+            monthlyCategoryBudgets[monthStr] = fallbackBudget;
+            localStorage.setItem('monthlyCategoryBudgets', JSON.stringify(monthlyCategoryBudgets));
+
+            return fallbackBudget;
+        }
+
         function initMonthSelector() {
             const monthsIndo = [
                 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
                 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ];
             
-            // Mengambil tanggal sekarang (18 Juni 2026 sebagai basis)
             const baseDate = new Date();
             monthSelector.innerHTML = '';
 
+            // Buat menu dropdown berisi 12 bulan terakhir
             for (let i = 0; i < 12; i++) {
                 const targetDate = new Date(baseDate.getFullYear(), baseDate.getMonth() - i, 1);
                 const year = targetDate.getFullYear();
@@ -607,7 +640,6 @@
 
         // Tanggal Format Tampilan Indonesia
         function formatDateString(dateStr) {
-            // dateStr format: YYYY-MM-DD
             if (!dateStr) return '';
             const parts = dateStr.split('-');
             if (parts.length !== 3) return dateStr;
@@ -623,7 +655,10 @@
         // Buka Modal Atur Budget
         window.openBudgetModal = function(category) {
             selectedCategoryToEdit = category;
-            const currentBudget = categoryBudgets[category] || 0;
+            
+            // Ambil data anggaran aktif di bulan terpilih saat ini
+            const budgets = getBudgetsForMonth(selectedMonthYear);
+            const currentBudget = budgets[category] || 0;
             const meta = categoryMeta[category] || { icon: 'fa-tag' };
             
             modalCategoryName.textContent = category;
@@ -637,11 +672,17 @@
             budgetModal.classList.add('hidden');
         };
 
-        // Simpan Limit Budget Kategori Baru
+        // Simpan Limit Budget Kategori Baru (Hanya berefek di bulan terpilih)
         window.saveCategoryBudget = function() {
             const newValue = Math.abs(Number(modalBudgetInput.value));
-            categoryBudgets[selectedCategoryToEdit] = newValue;
-            localStorage.setItem('categoryBudgets', JSON.stringify(categoryBudgets));
+            
+            // Ambil, ubah, dan simpan kembali khusus untuk bulan aktif
+            const budgets = getBudgetsForMonth(selectedMonthYear);
+            budgets[selectedCategoryToEdit] = newValue;
+            
+            monthlyCategoryBudgets[selectedMonthYear] = budgets;
+            localStorage.setItem('monthlyCategoryBudgets', JSON.stringify(monthlyCategoryBudgets));
+            
             closeBudgetModal();
             updateUI();
         };
@@ -704,6 +745,9 @@
             let totalSaldoGabungan = 0;
             let totalPemasukan = 0;
             let totalPengeluaran = 0;
+
+            // Ambil anggaran terdaftar untuk bulan aktif saat ini
+            const activeBudgets = getBudgetsForMonth(selectedMonthYear);
 
             // Inisialisasi pelacakan saldo akun secara dinamis berdasarkan seluruh transaksi kumulatif
             const accountBalances = {};
@@ -823,8 +867,8 @@
             // Render Panel Monitoring Akun (8 Sumber Dana)
             renderAccountsGrid(accountBalances);
 
-            // Render Progress Limit Budget Kategori
-            renderBudgetProgress(spentByCategory);
+            // Render Progress Limit Budget Kategori (menggunakan anggaran bulan aktif)
+            renderBudgetProgress(spentByCategory, activeBudgets);
 
             // Perbarui Diagram Chart.js
             updateChartData(spentByCategory);
@@ -860,11 +904,11 @@
         }
 
         // Render List Progress Bar Budget Pengeluaran
-        function renderBudgetProgress(spentByCategory) {
+        function renderBudgetProgress(spentByCategory, activeBudgets) {
             budgetProgressList.innerHTML = '';
             
             expenseCategories.forEach(category => {
-                const limit = categoryBudgets[category] || 0;
+                const limit = activeBudgets[category] || 0;
                 const spent = spentByCategory[category] || 0;
                 const remaining = limit - spent;
                 const meta = categoryMeta[category];
@@ -1025,7 +1069,6 @@
             // Jika transaksi yang baru diinput berada di bulan yang berbeda dari selektor bulan berjalan,
             // pindahkan selektor ke bulan transaksi tersebut agar langsung terlihat.
             if (txMonthYear !== selectedMonthYear) {
-                // Cari opsi bulan yang sesuai di selector
                 const options = Array.from(monthSelector.options);
                 const hasOption = options.some(opt => opt.value === txMonthYear);
                 
@@ -1060,8 +1103,10 @@
                 () => {
                     transactions = [];
                     accounts = defaultAccounts;
+                    monthlyCategoryBudgets = {};
                     localStorage.removeItem('transactions');
                     localStorage.removeItem('accounts');
+                    localStorage.removeItem('monthlyCategoryBudgets');
                     updateAccountOptions();
                     updateUI();
                 }
